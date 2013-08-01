@@ -7,6 +7,8 @@
 //
 
 #import "AppDelegate.h"
+#import "TodoListViewController.h"
+
 
 @implementation AppDelegate
 
@@ -14,6 +16,11 @@
 {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
+    
+    TodoListViewController * tdlVc = [[TodoListViewController alloc] initWithNibName:@"TodoListViewController" bundle:nil];
+    UINavigationController * nvc = [[UINavigationController alloc] initWithRootViewController:tdlVc];
+    self.window.rootViewController = nvc;
+    
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
     return YES;

@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		49891FAC17A70A58000BDF93 /* TodoListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 49C5900A17A6ECE900B5D27B /* TodoListViewController.m */; };
+		49891FAD17A70E53000BDF93 /* TodoListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 49C5900B17A6ECE900B5D27B /* TodoListViewController.xib */; };
 		49C32A5817A6E6DA000CFC4C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49C32A5717A6E6DA000CFC4C /* Foundation.framework */; };
 		49C32A5A17A6E6DA000CFC4C /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49C32A5917A6E6DA000CFC4C /* CoreGraphics.framework */; };
 		49C32A5C17A6E6DA000CFC4C /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49C32A5B17A6E6DA000CFC4C /* UIKit.framework */; };
@@ -48,6 +50,12 @@
 		49C32A7817A6E6DA000CFC4C /* ToDoList-CherishTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "ToDoList-CherishTests-Info.plist"; sourceTree = "<group>"; };
 		49C32A7A17A6E6DA000CFC4C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		49C32A7C17A6E6DA000CFC4C /* ToDoList_CherishTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ToDoList_CherishTests.m; sourceTree = "<group>"; };
+		49C5900917A6ECE900B5D27B /* TodoListViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TodoListViewController.h; sourceTree = "<group>"; };
+		49C5900A17A6ECE900B5D27B /* TodoListViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TodoListViewController.m; sourceTree = "<group>"; };
+		49C5900B17A6ECE900B5D27B /* TodoListViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TodoListViewController.xib; sourceTree = "<group>"; };
+		49CB305317AAC6F500DED32F /* temp.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = temp.h; sourceTree = "<group>"; };
+		49CB305417AAC6F500DED32F /* temp.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = temp.m; sourceTree = "<group>"; };
+		49CB305517AAC6F500DED32F /* temp.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = temp.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -111,6 +119,12 @@
 				49C32A6717A6E6DA000CFC4C /* AppDelegate.m */,
 				49C32A6917A6E6DA000CFC4C /* Images.xcassets */,
 				49C32A5E17A6E6DA000CFC4C /* Supporting Files */,
+				49C5900917A6ECE900B5D27B /* TodoListViewController.h */,
+				49C5900A17A6ECE900B5D27B /* TodoListViewController.m */,
+				49C5900B17A6ECE900B5D27B /* TodoListViewController.xib */,
+				49CB305317AAC6F500DED32F /* temp.h */,
+				49CB305417AAC6F500DED32F /* temp.m */,
+				49CB305517AAC6F500DED32F /* temp.xib */,
 			);
 			path = "ToDoList-Cherish";
 			sourceTree = "<group>";
@@ -219,6 +233,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				49891FAD17A70E53000BDF93 /* TodoListViewController.xib in Resources */,
 				49C32A6217A6E6DA000CFC4C /* InfoPlist.strings in Resources */,
 				49C32A6A17A6E6DA000CFC4C /* Images.xcassets in Resources */,
 			);
@@ -239,6 +254,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				49891FAC17A70A58000BDF93 /* TodoListViewController.m in Sources */,
 				49C32A6817A6E6DA000CFC4C /* AppDelegate.m in Sources */,
 				49C32A6417A6E6DA000CFC4C /* main.m in Sources */,
 			);
@@ -435,6 +451,7 @@
 				49C32A8217A6E6DA000CFC4C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		49C32A8317A6E6DA000CFC4C /* Build configuration list for PBXNativeTarget "ToDoList-CherishTests" */ = {
 			isa = XCConfigurationList;
@@ -443,6 +460,7 @@
 				49C32A8517A6E6DA000CFC4C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

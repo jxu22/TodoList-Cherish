@@ -53,9 +53,6 @@
 		49C5900917A6ECE900B5D27B /* TodoListViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TodoListViewController.h; sourceTree = "<group>"; };
 		49C5900A17A6ECE900B5D27B /* TodoListViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TodoListViewController.m; sourceTree = "<group>"; };
 		49C5900B17A6ECE900B5D27B /* TodoListViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TodoListViewController.xib; sourceTree = "<group>"; };
-		49CB305317AAC6F500DED32F /* temp.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = temp.h; sourceTree = "<group>"; };
-		49CB305417AAC6F500DED32F /* temp.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = temp.m; sourceTree = "<group>"; };
-		49CB305517AAC6F500DED32F /* temp.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = temp.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -122,9 +119,6 @@
 				49C5900917A6ECE900B5D27B /* TodoListViewController.h */,
 				49C5900A17A6ECE900B5D27B /* TodoListViewController.m */,
 				49C5900B17A6ECE900B5D27B /* TodoListViewController.xib */,
-				49CB305317AAC6F500DED32F /* temp.h */,
-				49CB305417AAC6F500DED32F /* temp.m */,
-				49CB305517AAC6F500DED32F /* temp.xib */,
 			);
 			path = "ToDoList-Cherish";
 			sourceTree = "<group>";

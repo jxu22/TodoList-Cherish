@@ -10,10 +10,12 @@
 
 @interface TodoListViewController ()
 
-@property (nonatomic, strong) NSMutableArray * toDoText;
--(void)load;
--(void)save;
--(NSString*)filePath;
+@property (nonatomic, strong) NSMutableArray * toDoText; // an NSString array to store the content of todo list
+@property (nonatomic, weak) UITableView * tableView;
+
+-(void)loadData;
+-(void)saveData;
+-(void)onAddButton;
 
 @end
 
@@ -24,6 +26,15 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         self.title = @"To Do List";
+        self.toDoText = [NSMutableArray array];
+      //  [self loadData];
+        self.navigationItem.leftBarButtonItem = self.editButtonItem; //edit按钮，左上
+        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(onAddButton)]; //+按钮 右上 加入触发函数onAddButton
+        
+        self.toDoText = [[NSMutableArray alloc] initWithCapacity:0]; //初始化可变数组
+        
+        NSLog(@"number %d" , self.toDoText.count);
+        
     }
     return self;
 }
@@ -31,10 +42,9 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    NSLog(@"hit1");
-
+    NSLog(@"viewDidLoad called");
     // Do any additional setup after loading the view from its nib.
-    [self load];
+    //[self loadData];
 }
 
 - (void)didReceiveMemoryWarning
@@ -46,49 +56,95 @@
 //table view source data
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
+    NSLog(@"numberOfSectionsInTableView called");
+    if(self.tableView == nil)   // 将self.tableView(弱引用)指向实体tableView
+        self.tableView = tableView;
+    
     return 1;
 }
 
+//这个函数的返回值必须和增加row的函数调用相对应,否则RTE
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
+    NSLog(@"number~ %d" , self.toDoText.count); 
+    
     return self.toDoText.count;
 }
 
+/*
+ *  initialize each cell of tableview with the content of toDoText(mutableArray)
+ *
+ */
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSLog(@"hit");
+    NSLog(@"cellForRowAtIndexPath called");
 
     static NSString *CellIdentifier = @"Cell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
-    [self load];
+    
+  
+    
+/*    [self loadData];*/
     
     UITextField * txt = [[UITextField alloc] initWithFrame:CGRectMake(20, 0, cell.contentView.frame.size.width - 15, cell.contentView.frame.size.height)];
     
     int indexOfCell = indexPath.row;
+    NSString * textInCell = [[NSString alloc] initWithString:[self.toDoText objectAtIndex:indexOfCell]];
     
-    
-    [txt setText:@"hello world!" ];
+    [txt setText:textInCell ];
     [cell.contentView addSubview:txt];
     return cell;
-}
-
-- (void)load
-{
     
 }
 
-- (void)save
+/*
+ *  load the latest data from disk to toDoText(mutableArray)
+ *
+ */
+
+- (void)loadData
 {
-    
+    NSUserDefaults *toDoTextDefault = [NSUserDefaults standardUserDefaults];
+    self.toDoText = [toDoTextDefault objectForKey:@"toDoText"];
 }
 
--(NSString*)filePath
+- (void)saveData
 {
-    return [[NSString alloc] init];
+    NSUserDefaults *toDoTextDefault = [NSUserDefaults standardUserDefaults];
+    [toDoTextDefault setObject:self.toDoText forKey:@"toDoText"];
+    [toDoTextDefault synchronize];
 }
+
+/*
+ *  When the + button is pressed
+ *
+ */
+
+-(void) onAddButton
+{
+    NSLog(@"onAddButton called!");
+    [self.toDoText insertObject:@"" atIndex:0];
+    [self.tableView insertRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:0 inSection:0]] withRowAnimation:UITableViewRowAnimationFade];
+}
+
+
+/*
+ *  End the editing process...
+ *
+ */
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+    [self.view endEditing:YES];
+    return YES;
+}
+
+- (void)textFieldDidEndEditing:(UITextField *)textField {
+    [self saveData];
+}
+
+
 
 /*
  // Override to support conditional editing of the table view.
@@ -106,7 +162,7 @@
  if (editingStyle == UITableViewCellEditingStyleDelete) {
  // Delete the row from the data source
      [self.toDoText removeObjectAtIndex:indexPath.row];
-     [self save];
+     [self saveData];
      [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
  }
  else if (editingStyle == UITableViewCellEditingStyleInsert) {

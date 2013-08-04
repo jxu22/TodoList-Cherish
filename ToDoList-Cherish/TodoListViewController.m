@@ -31,7 +31,12 @@
         self.navigationItem.leftBarButtonItem = self.editButtonItem; //edit按钮，左上
         self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(onAddButton)]; //+按钮 右上 加入触发函数onAddButton
         
-        self.toDoText = [[NSMutableArray alloc] initWithCapacity:0]; //初始化可变数组
+        [self loadData];
+        
+        if(self.toDoText == nil)
+        {
+            self.toDoText = [[NSMutableArray alloc] initWithCapacity:0]; //初始化可变数组
+        }
         
         NSLog(@"number %d" , self.toDoText.count);
         
@@ -89,13 +94,12 @@
     
 /*    [self loadData];*/
     
-    UITextField * txt = [[UITextField alloc] initWithFrame:CGRectMake(20, 0, cell.contentView.frame.size.width - 15, cell.contentView.frame.size.height)];
+    UITextField * txt = [self.toDoText objectAtIndex:indexPath.row];
     
-    int indexOfCell = indexPath.row;
-    NSString * textInCell = [[NSString alloc] initWithString:[self.toDoText objectAtIndex:indexOfCell]];
+    txt.frame = CGRectMake(20, 0, cell.contentView.frame.size.width - 15, cell.contentView.frame.size.height);
     
-    [txt setText:textInCell ];
     [cell.contentView addSubview:txt];
+    
     return cell;
     
 }
@@ -108,13 +112,15 @@
 - (void)loadData
 {
     NSUserDefaults *toDoTextDefault = [NSUserDefaults standardUserDefaults];
-    self.toDoText = [toDoTextDefault objectForKey:@"toDoText"];
+    NSData *array = [toDoTextDefault objectForKey:@"toDoText"];
+    self.toDoText = [NSKeyedUnarchiver unarchiveObjectWithData:array];
 }
 
 - (void)saveData
 {
     NSUserDefaults *toDoTextDefault = [NSUserDefaults standardUserDefaults];
-    [toDoTextDefault setObject:self.toDoText forKey:@"toDoText"];
+    NSData *array = [NSKeyedArchiver archivedDataWithRootObject:self.toDoText];
+    [toDoTextDefault setObject:array forKey:@"toDoText"];
     [toDoTextDefault synchronize];
 }
 
@@ -126,7 +132,16 @@
 -(void) onAddButton
 {
     NSLog(@"onAddButton called!");
-    [self.toDoText insertObject:@"" atIndex:0];
+    
+    UITextField * newTextField = [[UITextField alloc] init];
+    
+    newTextField.delegate = self;
+    
+    [newTextField becomeFirstResponder];
+    
+    [self.toDoText insertObject:newTextField atIndex:0];
+    
+    
     [self.tableView insertRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:0 inSection:0]] withRowAnimation:UITableViewRowAnimationFade];
 }
 
@@ -136,6 +151,7 @@
  *
  */
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
+    [textField becomeFirstResponder];
     [self.view endEditing:YES];
     return YES;
 }

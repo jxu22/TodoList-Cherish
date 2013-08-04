@@ -63,7 +63,9 @@
 {
     NSLog(@"numberOfSectionsInTableView called");
     if(self.tableView == nil)   // 将self.tableView(弱引用)指向实体tableView
+    {
         self.tableView = tableView;
+    }
     
     return 1;
 }
@@ -95,6 +97,8 @@
 /*    [self loadData];*/
     
     UITextField * txt = [self.toDoText objectAtIndex:indexPath.row];
+    
+    txt.delegate = self;
     
     txt.frame = CGRectMake(20, 0, cell.contentView.frame.size.width - 15, cell.contentView.frame.size.height);
     
@@ -151,6 +155,7 @@
  *
  */
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
+    NSLog(@"hit return");
     [textField becomeFirstResponder];
     [self.view endEditing:YES];
     return YES;
@@ -162,14 +167,18 @@
 
 
 
-/*
+
  // Override to support conditional editing of the table view.
  - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
  {
  // Return NO if you do not want the specified item to be editable.
  return YES;
  }
- */
+
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
+    [self.view endEditing:YES];
+}
+ 
 
 
  // Override to support editing the table view.
@@ -189,12 +198,15 @@
  }
  
 
-/*
+
  // Override to support rearranging the table view.
  - (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
  {
+     [self.toDoText exchangeObjectAtIndex:fromIndexPath.row withObjectAtIndex:toIndexPath.row];
+     [self saveData];
+     return;
  }
- */
+
 
 /*
  // Override to support conditional rearranging of the table view.

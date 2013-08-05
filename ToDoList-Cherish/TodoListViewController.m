@@ -70,6 +70,12 @@
     return 1;
 }
 
+- (void)setEditing:(BOOL)editing animated:(BOOL)animated {
+    [super setEditing:editing animated:animated];
+    [self.tableView setEditing:editing animated:animated];
+}
+
+
 //这个函数的返回值必须和增加row的函数调用相对应,否则RTE
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
@@ -208,14 +214,13 @@
  }
 
 
-/*
+
  // Override to support conditional rearranging of the table view.
  - (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
  {
- // Return NO if you do not want the item to be re-orderable.
- return YES;
+      return YES;
  }
- */
+
 
 
 

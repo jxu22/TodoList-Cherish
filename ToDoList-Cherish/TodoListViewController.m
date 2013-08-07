@@ -192,6 +192,7 @@
  {
  if (editingStyle == UITableViewCellEditingStyleDelete) {
  // Delete the row from the data source
+     [self.toDoText[indexPath.row] removeFromSuperview];
      [self.toDoText removeObjectAtIndex:indexPath.row];
      [self saveData];
      [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
